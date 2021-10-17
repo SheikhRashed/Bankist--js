@@ -1,0 +1,10 @@
+// Convert pixel to rem
+$rem-base: 16 !default;
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function rem($value) {
+  @return strip-unit($value) / $rem-base * 1rem;
+}

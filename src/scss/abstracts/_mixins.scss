@@ -1,0 +1,26 @@
+// fonts size
+@mixin text($s, $l, $w) {
+  font-size: $s; // $s =>  size
+  line-height: $l; // $l => line height
+  font-weight: $w; // $w => font-weight
+}
+
+// Responsive media query
+
+@mixin min($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin max($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin min-max($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
