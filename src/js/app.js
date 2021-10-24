@@ -38,10 +38,9 @@ const account4 = {
 const accounts = [account1, account2, account3, account4];
 
 // Elements
-
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.bala  nce__value');
+const labelBalance = document.querySelector('.balance__value');
 const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
@@ -90,5 +89,11 @@ const createUsernames = function (accs) {
 
 createUsernames(accounts);
 
-// 1. Get Deposit Values
-// 2. Get Withdrawal Values
+// Calculate Balanace
+const calcPrintBalance = (movements) => {
+	console.log(movements);
+	const balance = movements.reduce((acc, mov) => acc + mov, 0);
+	labelBalance.textContent = `${balance}€`;
+};
+
+calcPrintBalance(account1.movements);
