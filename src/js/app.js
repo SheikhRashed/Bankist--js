@@ -91,9 +91,36 @@ createUsernames(accounts);
 
 // Calculate Balanace
 const calcPrintBalance = (movements) => {
-	console.log(movements);
 	const balance = movements.reduce((acc, mov) => acc + mov, 0);
 	labelBalance.textContent = `${balance}€`;
 };
 
 calcPrintBalance(account1.movements);
+
+// coding challenge #2
+let data1 = [5, 2, 4, 1, 15, 8, 3];
+let data2 = [16, 6, 10, 5, 6, 1, 4];
+
+// 1.
+// function calcAverageHumanAge(dogAge) {
+// 	let HumanAge;
+// 	dogAge.forEach((age, i) => {
+// 		age <= 2 ? (HumanAge = 2 * age) : (HumanAge = 16 + age * 4);
+// 	});
+
+// 	return HumanAge;
+// }
+
+// console.log(calcAverageHumanAge(data1));
+
+const calcAverageHumanAge = function (ages) {
+	console.log(ages);
+
+	const humanAges = ages.map((age) => {
+		return age <= 2 ? 2 * age : 16 + age * 4;
+	});
+	// 1. Human Ages Finded
+	console.log(humanAges);
+};
+
+calcAverageHumanAge(data1);
