@@ -84,6 +84,14 @@ const calcDisplaySummery = function (movements) {
   const outcomes = movements.filter((mov) => mov < 0).reduce((acc, mov) => acc + mov, 0);
 
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * 1.2) / 100)
+    .filter((int) => int >= 1)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumInterest.textContent = `${interest}€`;
 };
 
 calcDisplaySummery(account1.movements);
