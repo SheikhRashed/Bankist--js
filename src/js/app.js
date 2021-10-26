@@ -57,6 +57,7 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+// Display Movements ()
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
   movements.forEach((mov, i) => {
@@ -75,6 +76,15 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+// Display Summery
+const calcDisplaySummery = function (movements) {
+  const incomes = movements.filter((mov) => mov > 0).reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+};
+
+calcDisplaySummery(account1.movements);
+
+// Create Username ()
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -84,9 +94,10 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
+
 createUsernames(accounts);
 
-// Calculate Balanace
+// Calculate Balanace()
 const calcPrintBalance = (movements) => {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}€`;
