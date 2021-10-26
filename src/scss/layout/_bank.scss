@@ -156,9 +156,21 @@ h2 {
         padding: 2.25rem 4rem;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid rgb(206, 196, 196);
+
+        &:nth-last-child(1) {
+          border-bottom: 0px;
+        }
         @include max(480px) {
           padding: 2.25rem 1.6rem;
+        }
+
+        &--deposit {
+          background-color: #78c46521;
+        }
+
+        &--withdrawal {
+          background-color: rgba(226, 161, 161, 0.288);
         }
       }
 
