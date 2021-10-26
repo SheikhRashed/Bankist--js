@@ -60,6 +60,27 @@ nav {
   }
 }
 
+.user {
+  display: flex;
+  align-items: center;
+
+  &__img {
+    width: 60px;
+    height: 60px;
+    margin-right: 12px;
+    img {
+      width: inherit;
+      height: inherit;
+    }
+  }
+  &__info {
+    span {
+      font-size: 18px;
+      text-transform: capitalize;
+    }
+  }
+}
+
 .login__btn:hover,
 .login__btn:focus,
 .btn--sort:hover,
@@ -125,6 +146,19 @@ h2 {
   max-width: 100rem;
   margin: 4rem auto;
   transition: all 1s;
+  // opacity: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  &.active {
+    opacity: 1;
+    height: auto;
+    visibility: visible;
+    pointer-events: all;
+
+    // opacity: 1;
+  }
 
   &-content {
     display: grid;
@@ -327,5 +361,7 @@ h2 {
   font-weight: 600;
 }
 footer {
+  font-size: 24px;
+  text-transform: capitalize;
   text-align: center;
 }

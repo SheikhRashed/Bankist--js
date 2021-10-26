@@ -9,7 +9,8 @@ const labelTimer = document.querySelector('.timer');
 const containerApp = document.querySelector('.app');
 const btnSort = document.querySelector('.btn--sort');
 const btnLogin = document.querySelector('.login__btn');
-const labelWelcome = document.querySelector('.welcome');
+// const labelWelcome = document.querySelector('.welcome');
+const userInfo = document.querySelector('.user__info span');
 const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const labelBalance = document.querySelector('.balance__value');
@@ -19,10 +20,10 @@ const btnTransfer = document.querySelector('.form__btn--transfer');
 const labelSumOut = document.querySelector('.summary__value--out');
 const inputClosePin = document.querySelector('.form__input--pin input');
 const inputTransferTo = document.querySelector('.form__input--to input');
-const inputLoginPin = document.querySelector('.login__input--pin input');
+const inputLoginPin = document.querySelector('.login__input--pin');
 const labelSumInterest = document.querySelector('.summary__value--interest');
 const inputCloseUsername = document.querySelector('.form__input--user input');
-const inputLoginUsername = document.querySelector('.login__input--user input');
+const inputLoginUsername = document.querySelector('.login__input--user');
 const inputTransferAmount = document.querySelector('.form__input--amount input');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount input');
 
@@ -74,8 +75,6 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 // Display Summery
 const calcDisplaySummery = function (movements) {
   const incomes = movements.filter((mov) => mov > 0).reduce((acc, mov) => acc + mov, 0);
@@ -91,10 +90,8 @@ const calcDisplaySummery = function (movements) {
     .filter((int) => int >= 1)
     .reduce((acc, mov) => acc + mov, 0);
 
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${parseFloat(interest).toFixed(2)}€`;
 };
-
-calcDisplaySummery(account1.movements);
 
 // Create Username ()
 const createUsernames = function (accs) {
@@ -112,7 +109,35 @@ createUsernames(accounts);
 // Calculate Balanace()
 const calcPrintBalance = (movements) => {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+  labelBalance.textContent = `${parseFloat(balance).toFixed(2)}€`;
 };
 
-calcPrintBalance(account2.movements);
+let currentAccount;
+// Event Handler() :
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find((acc) => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+
+  // Login
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // 1. Display UI & Message
+    userInfo.textContent = currentAccount.owner;
+
+    // Show UI
+    // containerApp.style.opacity = 1;
+    containerApp.classList.add('active');
+
+    // 2. Display movements
+    displayMovements(currentAccount.movements);
+
+    // 3. Display Balance
+    calcPrintBalance(currentAccount.movements);
+
+    // 4. Display Summary
+    calcDisplaySummery(currentAccount.movements);
+    // 5. Clear Input Fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+  }
+});
