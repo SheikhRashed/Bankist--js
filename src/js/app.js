@@ -26,7 +26,7 @@ const inputLoginUsername = document.querySelector('.login__input--user input');
 const inputTransferAmount = document.querySelector('.form__input--amount input');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount input');
 
-// Data
+// Users Account
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
@@ -59,14 +59,13 @@ const accounts = [account1, account2, account3, account4];
 
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
-
   movements.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
 		<div class="movements__row">
 			<div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-			<div class="movements__value">${mov}€</div>
+			<div class="movements__value movements__value--${type}">${mov}€</div>
 		</div>
 		`;
 
@@ -74,7 +73,7 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account3.movements);
+displayMovements(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -85,7 +84,6 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
-
 createUsernames(accounts);
 
 // Calculate Balanace
@@ -94,4 +92,4 @@ const calcPrintBalance = (movements) => {
   labelBalance.textContent = `${balance}€`;
 };
 
-calcPrintBalance(account1.movements);
+calcPrintBalance(account2.movements);

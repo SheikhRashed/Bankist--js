@@ -190,6 +190,10 @@ h2 {
       &__value {
         font-size: 1.7rem;
         margin-left: auto;
+
+        &--withdrawal {
+          color: #e52a5a;
+        }
       }
     }
 
