@@ -75,6 +75,19 @@ const displayMovements = function (movements) {
   });
 };
 
+// Create Username ()
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+
 // Display Summery
 const calcDisplaySummery = function (acc) {
   const incomes = acc.movements
@@ -97,21 +110,8 @@ const calcDisplaySummery = function (acc) {
   labelSumInterest.textContent = `${parseFloat(interest).toFixed(2)}€`;
 };
 
-// Create Username ()
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-  });
-};
-
-createUsernames(accounts);
-
 // Calculate Balanace()
-const calcPrintBalance = (movements) => {
+const calcDisplayBalance = (movements) => {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${parseFloat(balance).toFixed(2)}€`;
 };
@@ -137,7 +137,7 @@ btnLogin.addEventListener('click', function (e) {
     displayMovements(currentAccount.movements);
 
     // 3. Display Balance
-    calcPrintBalance(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
 
     // 4. Display Summary
     calcDisplaySummery(currentAccount);
