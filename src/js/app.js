@@ -76,17 +76,21 @@ const displayMovements = function (movements) {
 };
 
 // Display Summery
-const calcDisplaySummery = function (movements) {
-  const incomes = movements.filter((mov) => mov > 0).reduce((acc, mov) => acc + mov, 0);
+const calcDisplaySummery = function (acc) {
+  const incomes = acc.movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const outcomes = movements.filter((mov) => mov < 0).reduce((acc, mov) => acc + mov, 0);
+  const outcomes = acc.movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
 
   labelSumOut.textContent = `${Math.abs(outcomes)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
-    .map((deposit) => (deposit * 1.2) / 100)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int) => int >= 1)
     .reduce((acc, mov) => acc + mov, 0);
 
@@ -136,7 +140,7 @@ btnLogin.addEventListener('click', function (e) {
     calcPrintBalance(currentAccount.movements);
 
     // 4. Display Summary
-    calcDisplaySummery(currentAccount.movements);
+    calcDisplaySummery(currentAccount);
     // 5. Clear Input Fields
     inputLoginUsername.value = inputLoginPin.value = '';
   }
