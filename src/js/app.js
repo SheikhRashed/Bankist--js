@@ -58,6 +58,19 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+// Create Username ()
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+
 // Display Movements ()
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
@@ -74,19 +87,6 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-
-// Create Username ()
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-  });
-};
-
-createUsernames(accounts);
 
 // Display Summery
 const calcDisplaySummery = function (acc) {
@@ -118,11 +118,12 @@ const calcDisplayBalance = (movements) => {
 
 let currentAccount;
 // Event Handler() :
+
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
   currentAccount = accounts.find((acc) => acc.username === inputLoginUsername.value);
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   // Login
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
@@ -144,4 +145,12 @@ btnLogin.addEventListener('click', function (e) {
     // 5. Clear Input Fields
     inputLoginUsername.value = inputLoginPin.value = '';
   }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find((acc) => acc.username === inputTransferTo.value);
+  console.log(amount, receiverAcc);
 });
