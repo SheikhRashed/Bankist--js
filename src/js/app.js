@@ -114,7 +114,6 @@ const calcDisplaySummery = function (acc) {
 const calcDisplayBalance = (acc) => {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${parseFloat(acc.balance).toFixed(2)}€`;
-  console.log(acc);
 };
 
 // Update UI
@@ -142,12 +141,13 @@ btnLogin.addEventListener('click', function (e) {
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Show UI
 
-    // containerApp.style.opacity = 1;
+    // show UI
     containerApp.classList.add('active');
 
     //  Clear Input Fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
     // 1. Display UI & Message
     userInfo.textContent = currentAccount.owner;
 
@@ -162,6 +162,7 @@ btnTransfer.addEventListener('click', function (e) {
   const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find((acc) => acc.username === inputTransferTo.value);
 
+  // Clear Input
   inputTransferAmount.value = inputTransferTo.value = '';
 
   if (
@@ -176,5 +177,25 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    // Find Index of currentAccount
+    const index = accounts.findIndex((acc) => acc.username === currentAccount.username);
+
+    // Delete Account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.classList.remove('active');
+
+    //  Display UI & Message
+    userInfo.textContent = 'Log In to get started';
   }
 });

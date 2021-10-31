@@ -142,9 +142,9 @@ nav {
   position: relative;
   max-width: 100rem;
   margin: 4rem auto;
-  transition: all 1s;
   visibility: hidden;
   pointer-events: none;
+  transition: all 0.3s linear;
   &.active {
     opacity: 1;
     height: auto;
