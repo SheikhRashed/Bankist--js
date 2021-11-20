@@ -233,3 +233,6 @@ const overAllBalance = accounts
   .flatMap((acc) => acc.movements)
   .reduce((acc, cur) => acc + cur, 0);
 console.log(overAllBalance);
+
+
+// #something 
