@@ -93,7 +93,6 @@ const calcDisplaySummery = function (acc) {
   const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-
   labelSumIn.textContent = `${incomes}€`;
 
   const outcomes = acc.movements
@@ -197,7 +196,6 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-// Delete Account
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
@@ -217,19 +215,3 @@ btnClose.addEventListener('click', function (e) {
     userInfo.textContent = 'Log In to get started';
   }
 });
-
-// Flat & FlatMaps
-
-// Flat technique
-
-// const overAllBalance = accounts
-//   .map((acc) => acc.movements)
-//   .flat()
-//   .reduce((acc, cur) => acc + cur, 0);
-// console.log(overAllBalance);
-
-// FlatMap technique
-const overAllBalance = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce((acc, cur) => acc + cur, 0);
-console.log(overAllBalance);
