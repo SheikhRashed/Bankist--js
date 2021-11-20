@@ -69,12 +69,15 @@ const createUsernames = function (accs) {
   });
 };
 
-createUsernames(accounts);
+createUsernames(accounts)
 
 // Display Movements ()
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach((mov, i) => {
+
+  const movs = sort ? movements.slice().sort((a,b) => a-b) : movements; 
+
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -86,6 +89,7 @@ const displayMovements = function (movements) {
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
+
 };
 
 // Display Summery
@@ -196,6 +200,7 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
+// Delete Account 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
@@ -215,3 +220,16 @@ btnClose.addEventListener('click', function (e) {
     userInfo.textContent = 'Log In to get started';
   }
 });
+
+// Sorting Movements 
+let sorted = false;
+
+btnSort.addEventListener('click',function(e) { 
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
+
+
+
+
